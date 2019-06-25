@@ -1,0 +1,42 @@
+<section class="cart_details">
+    <table class="six columns offset-by-three">
+        <thead>
+        <tr>
+            <th>Товар</th>
+            <th>Цена</th>
+            <th>Колличество</th>
+            <th>Сумма</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        $total_sum = 0;
+        if(isset($data['cart_products'])){
+            foreach($data['cart_products'] as $key => $array){
+                foreach($array as $item){
+                $product_sum = $data['amount_of_each_products'][$item['id']] * $item['price'];
+                $total_sum += $product_sum; ?>
+                    <tr>
+                        <form action="" method="post">
+                            <td><?= $item['title'] ?></td>
+                            <td><?= $item['price'] ?> грн</td>
+                            <td><?= $data['amount_of_each_products'][$item['id']] ?> шт</td>
+                            <td><?= $product_sum ?> грн</td>
+
+                            <td><input type="hidden" name="deleted_id" value="<?= $item['id'] ?>"></td>
+                            <td><input type="submit" name="delete_from_cart" value=" удалить "></td>
+                        </form>
+
+                    </tr>
+            <?php  }
+            }
+        }
+?>
+        </tbody>
+    </table>
+    <div class="six columns offset-by-three">Всего товаров: <?= $data['cart_count']?> шт</div>
+    <div class="six columns offset-by-three">Общая сумма: <?= $total_sum?> грн</div>
+
+    <div class="six columns offset-by-three" style="margin-top: 30px"><a class="button" href="/order" target="_blank">Оформить заказ</a></div>
+
+</section>

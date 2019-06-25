@@ -1,0 +1,19 @@
+<section class="cart">
+    <p><a href="/cart" target="_blank"><i class="fas fa-shopping-cart"></i> Корзина </a></p>
+</section>
+
+<section class="products">
+    <?php foreach($data['products'] as $products){ ?>
+
+        <form class="products-item" action="" method="post">
+            <img src="<?= $products['image']?>" alt="">
+            <p><?= $products['title'] ?></p>
+            <p><?= $products['price'] ?> грн</p>
+            <input type="hidden" name="id" value="<?= $products['id'] ?>">
+            <input type="hidden" name="max_amount" value="<?= $products['max_amount'] ?>">
+            <input type="submit" name="add_to_cart" value="добавить в корзину">
+        </form>
+
+    <?php } ?>
+</section>
+

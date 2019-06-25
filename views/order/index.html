@@ -1,0 +1,41 @@
+<form action="" method="post">
+        <div class="row six columns offset-by-three">
+            <div>
+                <label for="NameInput">Имя</label>
+                <input class="u-full-width" type="text" id="NameInput">
+            </div>
+            <div>
+                <label for="PhoneInput">Номер телефона</label>
+                <input class="u-full-width" type="text"id="PhoneInput">
+            </div>
+            <div>
+                <label for="cityRef">Город</label>
+                <select id="cityRef" class="u-full-width" >
+                    <?php foreach ($data['cities']['data'] as $key => $item) { ?>
+                        <option class = "city_option" value="<?=$item['Ref'] ?>"><?= $item['Description'] ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div>
+                <label for="PointInput">Отделение</label>
+                <select id="PointInput" class="u-full-width" >
+
+                </select>
+            </div>
+            <input class="button-primary" type="submit" value="Submit">
+        </div>
+    </form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script>
+    $(function(){
+        $('#cityRef').change(function(){
+            var value = $(this).val();
+            $.post("/order", {term: value}).done(function(data){
+                // Display the returned data in browser
+                $('#PointInput').html(data);
+            });
+            console.log(value);
+        });
+    });
+</script>
